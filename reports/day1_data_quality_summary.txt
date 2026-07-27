@@ -1,0 +1,8 @@
+Day 1 Data Quality Summary
+
+• Successfully loaded all 10 datasets.
+• Successfully fetched live NAV data for 6 mutual fund schemes.
+• Verified unique fund houses, categories, sub-categories and risk categories.
+• All AMFI codes were validated against NAV history.
+• No missing AMFI codes found.
+• Data is ready for Day 2 cleaning and SQL loading.
