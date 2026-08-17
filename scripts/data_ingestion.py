@@ -1,32 +1,25 @@
+from pathlib import Path
 import os
-import pandas as pd
 
-DATA_FOLDER = "data/raw"
+# Project root = D:\MutualFundAnalytics
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-files = [f for f in os.listdir(DATA_FOLDER) if f.endswith(".csv")]
+# Raw data folder
+DATA_FOLDER = BASE_DIR / "data" / "raw"
 
-print(f"Total CSV Files: {len(files)}")
+print("Project directory:", BASE_DIR)
+print("Raw data directory:", DATA_FOLDER)
 
+if not DATA_FOLDER.exists():
+    raise FileNotFoundError(
+        f"Raw data folder not found: {DATA_FOLDER}"
+    )
+
+files = [
+    f.name for f in DATA_FOLDER.iterdir()
+    if f.is_file() and f.suffix.lower() == ".csv"
+]
+
+print(f"Found {len(files)} CSV files:")
 for file in files:
-
-    path = os.path.join(DATA_FOLDER, file)
-
-    print("="*70)
-    print(file)
-
-    df = pd.read_csv(path)
-
-    print("\nShape")
-    print(df.shape)
-
-    print("\nData Types")
-    print(df.dtypes)
-
-    print("\nFirst Five Rows")
-    print(df.head())
-
-    print("\nMissing Values")
-    print(df.isnull().sum())
-
-    print("\nDuplicate Rows")
-    print(df.duplicated().sum())
+    print(" -", file)
